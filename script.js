@@ -4,6 +4,8 @@ let bookerGridHolder = document.querySelector('#booker-grid-holder')
 let bookTicketBtn = document.querySelector('#book-ticket-btn')
 let booker = document.querySelector('#booker')
 
+
+//------------------ function to render api of movies-------------
 async function renderMovies() {
     mainElement.innerHTML = `<div id='loader'></div>`;
     let movies = await fetchMovieList();
@@ -18,6 +20,7 @@ async function renderMovies() {
 }
 renderMovies();
 
+//------------------ function to creating seperate tabs for movies-------------
 function createSeparateMovieTabs(movieData, wrapper) {
     let a = document.createElement('a');
     a.setAttribute('data-movie-name', `${movieData.name}`);
@@ -29,6 +32,8 @@ function createSeparateMovieTabs(movieData, wrapper) {
               </div>`;
     wrapper.appendChild(a);
 }
+
+
 function setEventToLinks() {
     let movieLinks = document.querySelectorAll('.movie-link');
     movieLinks.forEach(movieLink => {
@@ -38,6 +43,8 @@ function setEventToLinks() {
     })
 }
 
+
+//------------------ function to render Seat grid -------------
 async function renderSeatsGrid(movieName) {
     bookerGridHolder.innerHTML = `<div id="loader"></div>`
     bookTicketBtn.classList.add('v-none')
@@ -47,6 +54,7 @@ async function renderSeatsGrid(movieName) {
     setEventsToSeats();
 }
 
+//------------------ function to render seats-------------
 function renderSeats(data) {
 
     if (booker.firstElementChild.tagName !== "H3") {
@@ -64,6 +72,8 @@ function renderSeats(data) {
     createSeatsGrid(data);
 }
 
+
+//------------------ function to create grid for avilable seats-------------
 function createSeatsGrid(data) {
     let bookingGrid1 = document.createElement('div');
     let bookingGrid2 = document.createElement('div');
@@ -95,7 +105,7 @@ function createSeatsGrid(data) {
 
 
 let seatsSelected = [];
-
+//------------------ function to select seats -------------
 function setEventsToSeats() {
 
     let AvailableSeats = document.querySelectorAll('.available-seat')
@@ -107,6 +117,7 @@ function setEventsToSeats() {
     })
 }
 
+//------------------ function to save selected seats for movies-------------
 function saveSelectedSeat(seat) {
 
     if (!seat.classList.contains('selected-seat')) {
@@ -123,6 +134,7 @@ function saveSelectedSeat(seat) {
     }
 }
 
+//------------------ function to checking selected seats-------------
 function setTicketBooking() {
 
     bookTicketBtn.addEventListener('click', () => {
@@ -132,6 +144,8 @@ function setTicketBooking() {
         }
     })
 }
+
+//------------------ function for confirming tickets-------------
 
 function confirmTicket() {
     let confirmTicketElement = document.createElement('div')
@@ -145,6 +159,7 @@ function confirmTicket() {
     success();
 }
 
+//------------------ function to create form for user details-------------
 function createForm() {
 
     let from = document.createElement('form')
@@ -159,6 +174,7 @@ function createForm() {
     return from
 }
 
+//------------------ function to rendering  success message for ticket booking-------------
 function success() {
     let submitBtn = document.getElementById('submitBtn')
 
@@ -174,6 +190,7 @@ function success() {
     })
 }
 
+
 function renderSuccessMessage(email,phone) {
     booker.innerHTML = ""
     
@@ -181,6 +198,7 @@ function renderSuccessMessage(email,phone) {
     
 }
 
+//------------------ creating successful message-------------
 function createSuccessMessage(email,phone) {
     let successElement = document.createElement('div')
     successElement.setAttribute('id', 'success')
